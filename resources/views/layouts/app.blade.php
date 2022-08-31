@@ -25,7 +25,15 @@
                 </a>
 
                 @can('manageUsers', App\Models\User::class)
-                <a href="{{ route('users.index') }}">Manage User</a>                          
+                <a class="btn" href="{{ route('users.index') }}">Manage User</a>                          
+                @endcan
+
+                @can('manageUsers', App\Models\User::class)
+                <a class="btn" href="{{ route('blog.index') }}">Blog List</a>                          
+                @endcan
+
+                @can('manageUsers', App\Models\User::class)
+                <a class="btn" href="{{ route('pages.index') }}">Pages List</a>                          
                 @endcan
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Page;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PagesController extends Controller
+class BlogController extends Controller
 {
 
     public function __construct()
@@ -21,13 +21,12 @@ class PagesController extends Controller
      */
     public function index()
     {
-        // if(Auth::user()->hasAnyRole(['admin', 'editor'])){
         if (Auth::user()->isAdminOrEditor()) {
-            $pages = Page::all();
+            $posts = Post::all();
         } else {
-            $pages = Auth::user()->pages()->get();
+            $posts = Auth::user()->posts()->get();
         }
-        return view('admin.pages.index', ['pages' => $pages]);
+        return view('admin.blogs.index', ['model' => $posts]);
     }
 
     /**
@@ -37,7 +36,7 @@ class PagesController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.create')->with(['model' => new Page()]);
+        //
     }
 
     /**
@@ -48,52 +47,50 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
-        Auth::user()->pages()->save(new Page($request->only([
-            'title', 'url', 'content'
-        ])));
-
-        return redirect()->route('pages.index');
+        //
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Post $post)
+    {
+        //
+    }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Page  $page
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Page $page)
+    public function edit(Post $post)
     {
-        if (Auth::user()->cant('update', $page)) {
-            return redirect()->route('pages.index');
-        }
-        return view('admin.pages.edit', ['model' => $page]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Page  $page
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Page $page)
+    public function update(Request $request, Post $post)
     {
-        if (Auth::user()->cant('update', $page)) {
-            return redirect()->route('pages.index');
-        }
-        $page->fill($request->only(['title', 'url', 'content']));
-        $page->save();
-        return redirect()->route('pages.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Page  $page
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Page $page)
+    public function destroy(Post $post)
     {
         //
     }

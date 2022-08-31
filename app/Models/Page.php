@@ -10,6 +10,12 @@ class Page extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'url',
+        'content'
+    ]; 
+
     public function user(){
         return $this->belongsTo(User::class);
     }

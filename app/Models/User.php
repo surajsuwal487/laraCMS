@@ -52,6 +52,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function isAdminOrEditor() {
+        return $this->hasAnyRole(['admin', 'editor']);
+    }
+
     //check to see if a user is in a given role.
     //if it return null, the user is not in any of the provided roles.
     public function hasAnyRole($roles){
@@ -59,6 +63,6 @@ class User extends Authenticatable
     }
 
     public function hasRole($role){
-     return null !== $this->roles()->where('name', $roles)->first();
+     return null !== $this->roles()->where('name', $role)->first();
     }
 }

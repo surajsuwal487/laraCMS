@@ -23,6 +23,11 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
+
+                @can('manageUsers', App\Models\User::class)
+                <a href="{{ route('users.index') }}">Manage User</a>                          
+                @endcan
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -36,6 +41,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+
+
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">

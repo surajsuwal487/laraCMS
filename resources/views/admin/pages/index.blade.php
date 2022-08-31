@@ -2,6 +2,7 @@
 
 @section('content')
    <div class="container">
+      <a href="{{ route('pages.create') }}" class="btn btn-primary">Create New</a>
       <table class="table">
          <thead>
             <tr>
@@ -12,7 +13,9 @@
 
          @foreach ($pages as $page )
             <tr>
-               <td>{{ $page->title }}</td>
+               <td>
+                  <a href="{{ route('pages.edit', ['page' => $page->id]) }}">{{ $page->title }}</a>
+               </td>
                <td>{{ $page->url }}</td>
             </tr>
          @endforeach

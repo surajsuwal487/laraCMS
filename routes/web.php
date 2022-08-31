@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/admin', function(){
-    return 'you are an admin, editor, author';
+    return view('admin.admin');
 })->middleware('admin');
 
-Route::resource('/admin/pages', PagesController::class);
+Route::resource('/admin/pages', PagesController::class, ['except' =>['show']]);
+
+Route::resource('/admin/users', UserController::class, ['except' =>['show','store', 'create']]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
